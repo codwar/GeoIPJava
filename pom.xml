@@ -5,8 +5,25 @@
 	<artifactId>GeoIPJava</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 
+	<scm>
+		<connection>scm:git:ssh://git@github.com/codwar/GeoIPJava.git</connection>
+	</scm>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+	</properties>
+
 	<build>
 		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-release-plugin</artifactId>
+				<version>2.2.1</version>
+				<configuration>
+					<tagNameFormat>v@{project.version}</tagNameFormat>
+					<pushChanges>false</pushChanges>
+				</configuration>
+			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
@@ -17,6 +34,33 @@
 				</configuration>
 			</plugin>
 		</plugins>
+		<extensions>
+			<extension>
+				<groupId>ar.com.synergian</groupId>
+				<artifactId>wagon-git</artifactId>
+				<version>0.1.4</version>
+			</extension>
+		</extensions>
 	</build>
+
+	<repositories>
+		<repository>
+			<id>codwar</id>
+			<url>https://raw.github.com/codwar/wagon-git/releases</url>
+		</repository>
+	</repositories>
+
+	<distributionManagement>
+		<repository>
+			<id>codwar-repo</id>
+			<name>Codwar Repository</name>
+			<url>git:releases://git@github.com:codwar/maven-repo.git</url>
+		</repository>
+		<snapshotRepository>
+			<id>codwar-repo</id>
+			<name>Codwar Repository</name>
+			<url>git:snapshots://git@github.com:codwar/maven-repo.git</url>
+		</snapshotRepository>
+	</distributionManagement>
 
 </project>
